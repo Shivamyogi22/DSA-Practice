@@ -1,35 +1,40 @@
 #include<iostream>
+#include<vector>
 using namespace std;
 
 // Function to merge two sorted halves
 void merge(int arr[], int start, int mid, int end) {
-    int temp[1000];  // assuming array size won't exceed 1000
-    int i = start;
-    int j = mid + 1;
-    int k = start;
+    vector<int>temp;
+    int i = start; int j = mid+1;
+    int invCount = 0;
 
-    while(i <= mid && j <= end) {
-        if(arr[i] < arr[j]) {
-            temp[k++] = arr[i++];
+    while(i<=mid && j<=end){
+        if(arr[i] <= arr[j]){
+            temp.push_back(arr[i]);
+            i++;
         }
-        else {
-            temp[k++] = arr[j++];
+        else{
+            temp.push_back(arr[j]);
+            j++;
+            invCount = invCount+ (mid - i + 1);
         }
     }
 
-    // Copy remaining elements
-    while(i <= mid) {
-        temp[k++] = arr[i++];
+    while(i<=mid){
+        temp.push_back(arr[i]);
+        i++;
     }
 
-    while(j <= end) {
-        temp[k++] = arr[j++];
+    while(j<=end){
+        temp.push_back(arr[j]);
+        j++;
     }
 
-    // Copy back to original array
-    for(int x = start; x <= end; x++) {
-        arr[x] = temp[x];
+    for(int m =0; m<temp.size(); m++){
+        arr[m+start] = temp[m];
     }
+
+     
 }
 
 // Recursive Merge Sort Function
