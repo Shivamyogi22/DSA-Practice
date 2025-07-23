@@ -69,11 +69,8 @@ int getLength(Node*head){
 
 void insertAtPosition(Node* &head, Node* &tail, int data, int position){
     int length = getLength(head);
-    if(position < 1 ){
-        cout<<"Cannot Insert, Please Enter a valid position";
-    }
     
-    if(position <= 1){
+    if(position == length + 1){
         insertAtHead(head, tail, data);
     }
     else if(position > length){
